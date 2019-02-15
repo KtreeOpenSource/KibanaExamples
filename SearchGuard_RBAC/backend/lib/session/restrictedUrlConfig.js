@@ -7,10 +7,7 @@
      'visualization',
      'discover',
      'dev_tools',
-    //  'console',
      'management',
-     'upload-panel',
-    //  '_bulk_get'
  ]
 
  module.exports = restrictedUrls

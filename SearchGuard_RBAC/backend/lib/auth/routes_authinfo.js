@@ -46,18 +46,9 @@ module.exports = function (pluginRoot, server, kbnServer, APP_ROOT, API_ROOT) {
                 const roles = authinfo ? authinfo.backend_roles : '';
                     unauthorizedUrlstoExecutives.map((element) => {
                         if (roles.includes('admin') === false) {
-                            // console.log('roles', roles)
-                            // console.log('unauthorizedUrlstoExecutives', unauthorizedUrlstoExecutives)
-                            // console.log('requestPath', requestPath)
-                            // console.log('element', element)
                             if (requestPath.includes(element)) {
                                 if (!requestPath.includes('index.css') && !requestPath.includes('bundles') && !requestPath.includes('assets')) {
-                                    const basePath = server.config().get('server.basePath');
-                                    // console.log('basePath', basePath)
-                                    // return next.redirect(basepath + '/login');
                                     request.auth.session.clear();
-                                    // redirect to login somehow?
-                                    // return next.continue();
                                 }
                             }
                         }

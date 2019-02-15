@@ -42,10 +42,6 @@ import {
 } from '@elastic/eui';
 import { DashboardConstants, createDashboardEditUrl } from '../dashboard_constants';
 
-// import chrome from 'ui/chrome';
-// const ROOT = chrome.getBasePath();
-// const APP_ROOT = `${ROOT}`;
-// const API_ROOT = `${APP_ROOT}/api/v1/auth`;
 export const EMPTY_FILTER = '';
 
 // saved object client does not support sorting by title because title is only mapped as analyzed
@@ -166,14 +162,11 @@ export class DashboardListing extends React.Component {
     getPageOfItems = () => {
       //role based access to dashboards
       const loggeduserRoles = sgAuthUserInfo.backend_roles;
-      // console.log('loggeduserRoles', loggeduserRoles);
       //storing public dashboard id in session
-      // console.log('this.state.dashboards',this.state.dashboards)
       this.state.dashboards.map((element) => {
         // console.log('element', element.title)
         if(element.title === 'Public Dashboard') {
           sessionStorage.setItem ('sg_public_dashId', element.id);
-          // console.log(sessionStorage.getItem ('sg_public_dashId'));
         }
       });
 
@@ -181,12 +174,10 @@ export class DashboardListing extends React.Component {
       let dash = [];
       const roleBasedDashboards = [];
       if (loggeduserRoles.includes('admin') === false) {
-        // console.log('kibanaDashBoardAccessConfig', kibanaDashBoardAccessConfig);
         if (kibanaDashBoardAccessConfig) {
           kibanaDashBoardAccessConfig.map((value) => {
             loggeduserRoles.forEach((role) => {
               if (value.role === role) {
-                // console.log('value.dashboards', value.dashboards);
                 dash.push(...value.dashboards);
               }
             });
@@ -203,7 +194,6 @@ export class DashboardListing extends React.Component {
           });
         }
       }
-      // console.log('roleBasedDashboards',roleBasedDashboards)
       // do not sort original list to preserve elasticsearch ranking order
       let dashboardsCopy = '';
       if(roleBasedDashboards.length !== 0) {
@@ -213,7 +203,6 @@ export class DashboardListing extends React.Component {
       }else{
         dashboardsCopy = '';
       }
-      // const dashboardsCopy = this.state.dashboards.slice();
 
       if (this.state.sortField) {
         dashboardsCopy.sort((a, b) => {
